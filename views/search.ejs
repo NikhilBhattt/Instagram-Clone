@@ -1,0 +1,89 @@
+<% include ./partials/header.ejs %>
+<div class="w-full md:ml-[24vw] md:w-[45vw] min-h-screen bg-zinc-900 px-4 py-5">
+  <div
+    class="border-2 border-zinc-800 flex items-center justify-between px-2 py-1 rounded-md"
+  >
+    <i class="text-white ri-search-line"></i>
+    <input
+      id="search-bar"
+      class="ml-2 w-full bg-zinc-900 outline-none text-zinc-400 md:h-9"
+      type="text"
+      placeholder="search username"
+    />
+  </div>
+  <div class="users"></div>
+</div>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+  integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script>
+  let user = null;
+
+  async function fetchUserData() {
+    try {
+      const response = await axios.get("/current-user");
+      user = response.data;
+      initializeSearch();
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  }
+
+  function initializeSearch() {
+    var clutter = "";
+    const searchBar = document.getElementById("search-bar");
+    searchBar.addEventListener("input", () => {
+      axios
+        .get(`/username/${searchBar.value}`)
+        .then((data) => {
+          clutter = "";
+          data.data.forEach((usr) => {
+            const isFollowing = user.following.includes(usr._id);
+            clutter += `
+                        <div class="hover:bg-zinc-800 px-1 outline-none rounded relative">
+                            <div class="text-white flex items-center gap-4 mt-5">
+                                <div class="image size-[8vh] md:size-[12vh] rounded-full overflow-hidden">
+                                    <img class="w-full h-full object-cover" src=${
+                                      usr.profileImg 
+                                        ? `/images/uploads/${usr.profileImg}` 
+                                        : "https://imgs.search.brave.com/ma7sEjlAFcmBAqpdxMvbQfehHQhOJ3dq-l8rWJdCTq0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzY0LzY3LzYz/LzM2MF9GXzY0Njc2/MzgzX0xkYm1oaU5N/NllwemIzRk00UFB1/RlA5ckhlN3JpOEp1/LmpwZw"
+                                    }>    
+                                </div>
+                                <div class="text">
+                                    <h3>${usr.username}</h3>
+                                    <h4 class="text-xs mt-1 opacity-30 leading-none">
+                                        ${usr.name}    
+                                    </h4>
+                                </div>
+                                ${
+                                  (user._id !== usr._id) ? 
+                                  (  isFollowing
+                                    ? `
+                                    <a class="absolute right-[1rem] border border-zinc-300 flex items-center right-2 text-sm h-[65%] rounded-md md:h-[50%] md:px-4 px-3" href="/follow/${usr._id}">
+                                        Unfollow
+                                    </a>
+                                `
+                                    : `
+                                    <a class="absolute right-[1rem] flex items-center right-2 text-sm bg-blue-500 hover:bg-blue-600 h-[65%] rounded-md md:h-[50%] md:px-4 px-3" href="/follow/${usr._id}">
+                                        Follow
+                                    </a>
+                                `) : ''
+                                }
+                            </div>            
+                        </div>
+                        `;
+          });
+          document.querySelector(".users").innerHTML = clutter;
+        })
+        .catch(() => {
+          document.querySelector(".users").innerHTML = "";
+        });
+    });
+  }
+
+  fetchUserData();
+</script>
+<% include ./partials/footer.ejs %>

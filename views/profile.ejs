@@ -1,0 +1,78 @@
+<% include ./partials/header.ejs %>
+  <div class="w-full min-h-screen md:ml-[24vw] md:w-[45vw] bg-zinc-900 text-white py-2 md:py-4">
+      <div class="md:hidden nav flex justify-between items-center px-4">
+        <h3 class="text-xl ml-2"><%= user.username %></h3>
+        <div class="icons flex gap-5">
+          <a href="/upload"><i class="text-[1.4rem] ri-add-box-line"></i></a>
+          <a href="/logout"> <i class="text-[1.4rem] ri-logout-box-r-line"></i></a>
+        </div>
+      </div>
+    <hr class="md:hidden opacity-10 mt-2 mb-1">
+      <div class="flex justify-between md:justify-around items-center pl-6 pr-[6vw] md:pr-0 md:mt-6 mt-3">
+        <div class="size-[24vw] md:size-[11vw] bg-sky-100 rounded-full overflow-hidden">
+          <% if (user.profileImg) { %>
+            <img class="w-full h-full object-cover"
+              src="/images/uploads/<%= user.profileImg %>">
+          <% } else { %>
+            <img class="w-full h-full object-cover"
+              src="https://imgs.search.brave.com/ma7sEjlAFcmBAqpdxMvbQfehHQhOJ3dq-l8rWJdCTq0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzY0LzY3LzYz/LzM2MF9GXzY0Njc2/MzgzX0xkYm1oaU5N/NllwemIzRk00UFB1/RlA5ckhlN3JpOEp1/LmpwZw">
+          <% } %>
+        </div>
+        <div class="md:w-[20vw] flex flex-col gap-[1.25rem] items-between ">
+          <div class="text-lg hidden md:flex flex-wrap justify-between items-center">
+            <span><%= user.username %></span>
+            <a class="px-3 py-2 bg-zinc-700 hover:bg-zinc-800 text-xs rounded-md font-semibold" href="/edit">Edit Profile</a>
+            <a class="px-3 py-2 bg-zinc-700 hover:bg-zinc-800 text-xs rounded-md font-semibold" href="">Saved Posts</a>
+          </div>
+          <div class="stats shrink flex gap-[5vw] items-center justify-between ">
+            <div class="shrink flex flex-col items-center justify-center">
+              <h3 class="font-semibold"><%= user.posts.length %></h3>
+              <h4 class="tracking-tighter md:tracking-tight">Posts</h4>
+            </div>
+            <div class="shrink flex flex-col items-center justify-center">
+              <h3 class="font-semibold"><%= user.followers.length %></h3>
+              <h4 class="tracking-tighter md:tracking-tight">Followers</h4>
+            </div>
+            <div class="shrink flex flex-col items-center justify-center">
+              <h3 class="font-semibold"><%= user.following.length %></h3>
+              <h4 class="tracking-tighter md:tracking-tight">Following</h4>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <h3 class="text-lg leading-7"><%= user.name %></h3>
+            <p class="text-xs tracking-tight opacity-90 "><%= user.bio %></p>
+          </div>
+        </div>
+        
+      </div>
+      <div class="md:hidden px-6 mt-3">
+        <h3 class="text-lg leading-6"><%= user.name %></h3>
+        <p class="text-xs tracking-tight opacity-60"><%= user.bio %></p>
+      </div>
+      <div class="md:hidden px-5 mt-4">
+        <a class="px-3 py-2 bg-zinc-800 text-xs rounded-md font-semibold" href="/edit">Edit Profile</a>
+      </div>
+
+      <hr class="hidden md:block opacity-20 my-6">
+      <div class="posts mb-5 w-full flex items-center gap-1 py-2 mt-5 flex-wrap">
+        <% if (user.posts.length === 0) { %>
+          <div class="h-fit md:mt-4 mt-1 w-full flex justify-center items-center">
+            <div class="text-center flex flex-col md:gap-3 gap-2">
+              <i class="text-6xl opacity-80 font-light ri-image-line"></i>
+              <h3 class="md:text-2xl text-xl font-semibold tracking-tighter">Share Photos</h3>
+              <h4 class="md:text-sm tracking-wide text-xs">When you share photos, they will appear on your profile.</h4>
+              <div>
+                <a href="/upload" class="text-blue-500">Share your first photo</a>
+              </div>
+            </div>
+          </div>
+        <% } else { %>
+          <% user.posts.forEach(post => { %>
+            <div class="post w-[32.5%] md:w-[32] h-32 md:h-64 md:rounded-sm overflow-hidden">
+              <img class="w-full h-full object-cover" src="/images/uploads/<%= post.postImage %>">
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+  </div>
+<% include ./partials/footer.ejs %> 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      <% var is_title = (typeof title === 'undefined')? false : true %>
+      <% if (is_title) { %>
+        <%= title %>
+      <% } else { %>
+        Instagram
+      <% } %>
+    </title>
+    <link rel="shortcut icon" href="https://imgs.search.brave.com/E-zhH0wUZET-_4Dh6TJa4HZbywnK5qaAWydvcICk0hk/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMtMDAuaWNvbmR1/Y2suY29tL2Fzc2V0/cy4wMC9pbnN0YWdy/YW0taWNvbi0yNTZ4/MjU2LWVzNmF1ZHc1/LnBuZw" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-zinc-900">
+    <!-- SIDEBAR -->
+    <% var is_user = (typeof user === 'undefined')? false : true %> <% if
+    (is_user) { %>
+    <div
+      class="hidden md:block fixed left-0 top-0 w-[16vw] h-screen bg-zinc-900 text-white border-r-2 border-r-zinc-800 py-10 px-5 overflow-x-hidden overflow-y-auto "
+    >
+      <a class="block px-2 mb-6" href="/feed">
+        <img class="block w-1/2" src="/images/logo.png" />
+      </a>
+      <a
+        class="block rounded-lg hover:bg-zinc-800 px-2 py-2 mb-2 px-1 flex gap-4 items-center text-md"
+        href="/feed"
+      >
+        <i class="block text-[1.8rem] ri-home-line"></i>
+        <div>Home</div>
+      </a>
+      <a
+        class="block rounded-lg hover:bg-zinc-800 px-2 py-2 mb-2 px-1 flex gap-4 items-center text-md"
+        href="/search"
+      >
+        <i class="block text-[1.8rem] ri-search-line"></i>
+        <div>Search</div>
+      </a>
+      <a
+        class="block rounded-lg hover:bg-zinc-800 px-2 py-2 mb-2 px-1 flex gap-4 items-center text-md"
+        href=""
+      >
+        <i class="block text-[1.8rem] ri-messenger-line"></i>
+        <div>Direct</div>
+      </a>
+      <a
+        class="block rounded-lg hover:bg-zinc-800 px-2 py-2 mb-2 px-1 flex gap-4 items-center text-md"
+        href=""
+      >
+        <i class="block text-[1.8rem] ri-heart-3-line"></i>
+        <div class="line-clamp-1">Notifications</div>
+      </a>
+      <a
+        class="block rounded-lg hover:bg-zinc-800 px-2 py-2 mb-2 px-1 flex gap-4 items-center text-md"
+        href="/upload"
+      >
+        <i class="block text-[1.8rem] ri-add-box-line"></i>
+        <div>Create</div>
+      </a>
+      <a
+        class="block rounded-lg hover:bg-zinc-800 px-2 py-2 mb-2 px-1 flex gap-4 items-center text-md"
+        href="/profile"
+      >
+        <div class="w-8 h-8 bg-zinc-300 rounded-full overflow-hidden">
+          <% if (user.profileImg) { %>
+          <img
+            class="w-full h-full object-cover"
+            src="/images/uploads/<%= user.profileImg %>"
+          />
+          <% } else { %>
+          <img
+            class="w-full h-full object-cover"
+            src="https://imgs.search.brave.com/ma7sEjlAFcmBAqpdxMvbQfehHQhOJ3dq-l8rWJdCTq0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzY0LzY3LzYz/LzM2MF9GXzY0Njc2/MzgzX0xkYm1oaU5N/NllwemIzRk00UFB1/RlA5ckhlN3JpOEp1/LmpwZw"
+          />
+          <% } %>
+        </div>
+        <div>Profile</div>
+      </a>
+      <a
+        class="block text-white rounded-lg hover:bg-zinc-800 px-2 py-2 mb-2 px-1 flex gap-4 items-center text-md"
+        href="/logout"
+      >
+        <i class="block text-[1.8rem] ri-logout-box-r-line"></i>
+        <div>Logout</div>
+      </a>
+    </div>
+    <% } %>
+  </body>
+</html>

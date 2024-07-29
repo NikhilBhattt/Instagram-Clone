@@ -1,0 +1,34 @@
+<% if(footer){ %>
+  <div class="w-full md:hidden flex justify-center">
+    <div class="footer text-white flex justify-between items-center w-full md:w-[45vw] fixed bottom-0 z-[10] bg-zinc-900 px-10 py-3">
+      <a href="/feed"><i class="text-[1.4rem] ri-home-line"></i></a>
+      <a href="/search"><i class="text-[1.4rem] ri-search-line"></i></a>
+      <a href="/upload"><i class="text-[1.4rem] ri-add-box-line"></i></a>
+      <a href="/profile">
+        <div class="w-8 h-8 bg-zinc-300 rounded-full overflow-hidden">
+          <% if (user.profileImg) { %>
+            <img class="w-full h-full object-cover"
+              src="/images/uploads/<%= user.profileImg %>">
+          <% } else { %>
+            <img class="w-full h-full object-cover"
+              src="https://imgs.search.brave.com/ma7sEjlAFcmBAqpdxMvbQfehHQhOJ3dq-l8rWJdCTq0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzY0LzY3LzYz/LzM2MF9GXzY0Njc2/MzgzX0xkYm1oaU5N/NllwemIzRk00UFB1/RlA5ckhlN3JpOEp1/LmpwZw">
+          <% } %>
+        </div>
+      </a>
+    </div>
+  </div>
+<% } %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
+      var scrollpos = localStorage.getItem('scrollpos');
+      if (scrollpos) window.scrollTo(0, scrollpos);
+  });
+
+  window.onbeforeunload = function(e) {
+      localStorage.setItem('scrollpos', window.scrollY);
+  };
+</script>
+
+</body>
+</html>

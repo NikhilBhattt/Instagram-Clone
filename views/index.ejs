@@ -1,0 +1,80 @@
+<% include ./partials/header.ejs %>
+<div
+  class="w-full min-h-screen bg-zinc-900 text-white py-5 flex flex-col items-center justify-center"
+>
+  <div class="md:w-[25%] px-6 py-16 md:border-2 md:border-zinc-800 rounded-md flex flex-col items-center gap-5">
+    <img class="w-1/2" src="/images/logo.png" alt="" />
+    <form class="w-full" action="/register" method="post">
+      <input
+        class="px-3 mt-2 py-2 border-2 border-zinc-800 rounded-md block w-full bg-zinc-900"
+        type="text"
+        placeholder="username"
+        required
+        name="username"
+      />
+      <input
+        class="px-3 mt-2 py-2 border-2 border-zinc-800 rounded-md block w-full bg-zinc-900"
+        type="email"
+        placeholder="email"
+        required
+        name="email"
+      />
+      <input
+        class="px-3 mt-2 py-2 border-2 border-zinc-800 rounded-md block w-full bg-zinc-900"
+        type="text"
+        placeholder="name"
+        required
+        name="name"
+      />
+      <div class="relative">
+        <input
+          id="form-password"
+          class="px-3 mt-2 py-2 border-2 border-zinc-800 rounded-md block w-full bg-zinc-900"
+          type="password"
+          placeholder="password"
+          required
+          name="password"
+        />
+        <div class="absolute top-[7px] right-3 text-xl bg-zinc-900 ">
+          <i id="password-see" class="ri-eye-off-line hidden cursor-pointer z-2 opacity-90"></i>
+        </div>
+      </div>
+      <input
+        class="w-full bg-blue-500 px-3 py-3 rounded-md mt-2 font-semibold"
+        type="submit"
+        value="Create Account"
+      />
+    </form>
+    <span
+      >Already have an account ?
+      <a href="/login" class="text-blue-500">Log In</a></span
+    >
+  </div>
+</div>
+<script>
+  let passwordIcon = document.getElementById('password-see');
+  let formPassword = document.getElementById('form-password');
+
+  formPassword.addEventListener('input', () => {
+    if (formPassword.value==='') {
+      passwordIcon.classList.add('hidden');
+    }
+    else {
+      passwordIcon.classList.remove('hidden');
+    }
+  })
+
+  passwordIcon.onclick = () => {
+    if (formPassword.getAttribute('type')==='password'){
+      formPassword.setAttribute('type', 'text');
+      passwordIcon.classList.remove('ri-eye-off-line');
+      passwordIcon.classList.add('ri-eye-line');
+    }
+    else {
+      formPassword.setAttribute('type', 'password');
+      passwordIcon.classList.remove('ri-eye-line');
+      passwordIcon.classList.add('ri-eye-off-line');
+    }
+  }
+</script>
+<% include ./partials/footer.ejs %>
