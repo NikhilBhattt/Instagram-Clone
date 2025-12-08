@@ -88,24 +88,38 @@ router.post('/edit', isLoggedIn, upload.single('image'), async function(req, res
     { new : true }
   )
   if (req.file){
-    user.profileImg = req.file.filename
+    user.profileImg = req.file.path
   }
   await user.save()
   res.redirect('/profile')
 })
 
-router.post('/upload', isLoggedIn, upload.single('postImage'), async function(req, res) {
-  const user = await userModel.findOne({username : req.session.passport.user})
-  const post = await postModel.create({
-    caption : req.body.caption,
-    postImage : req.file.filename,
-    user : user._id
-  })
-  user.posts.push(post._id)
-  await user.save()
 
-  res.redirect('/feed')
-})
+router.post('/upload', isLoggedIn, upload.single('postImage'), async function(req, res) {
+  try {
+    const user = await userModel.findOne({ username: req.session.passport.user });
+
+    if (!req.file) {
+      return res.status(400).send("No file uploaded");
+    }
+
+    const post = await postModel.create({
+      caption: req.body.caption,
+      postImage: req.file.path,  // ✅ Cloudinary URL
+      user: user._id
+    });
+
+    user.posts.push(post._id);
+    await user.save();
+
+    res.redirect('/feed');
+
+  } catch (err) {
+    console.error("UPLOAD ERROR:", err);
+    res.status(500).send("Upload failed");
+  }
+});
+
 
 // axios 
 router.get('/username/:usr', isLoggedIn, async function(req, res) {

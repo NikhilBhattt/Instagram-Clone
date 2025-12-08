@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      <% var is_title = (typeof title === 'undefined')? false : true %>
-      <% if (is_title) { %>
-        <%= title %>
-      <% } else { %>
-        Instagram
-      <% } %>
+      <% var is_title = (typeof title === 'undefined')? false : true %> <% if
+      (is_title) { %> <%= title %> <% } else { %> Instagram <% } %>
     </title>
-    <link rel="shortcut icon" href="https://imgs.search.brave.com/E-zhH0wUZET-_4Dh6TJa4HZbywnK5qaAWydvcICk0hk/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMtMDAuaWNvbmR1/Y2suY29tL2Fzc2V0/cy4wMC9pbnN0YWdy/YW0taWNvbi0yNTZ4/MjU2LWVzNmF1ZHc1/LnBuZw" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="https://imgs.search.brave.com/E-zhH0wUZET-_4Dh6TJa4HZbywnK5qaAWydvcICk0hk/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMtMDAuaWNvbmR1/Y2suY29tL2Fzc2V0/cy4wMC9pbnN0YWdy/YW0taWNvbi0yNTZ4/MjU2LWVzNmF1ZHc1/LnBuZw"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css"
@@ -24,7 +24,7 @@
     <% var is_user = (typeof user === 'undefined')? false : true %> <% if
     (is_user) { %>
     <div
-      class="hidden md:block fixed left-0 top-0 w-[16vw] h-screen bg-zinc-900 text-white border-r-2 border-r-zinc-800 py-10 px-5 overflow-x-hidden overflow-y-auto "
+      class="hidden md:block fixed left-0 top-0 w-[16vw] h-screen bg-zinc-900 text-white border-r-2 border-r-zinc-800 py-10 px-5 overflow-x-hidden overflow-y-auto"
     >
       <a class="block px-2 mb-6" href="/feed">
         <img class="block w-1/2" src="/images/logo.png" />
@@ -72,7 +72,7 @@
           <% if (user.profileImg) { %>
           <img
             class="w-full h-full object-cover"
-            src="/images/uploads/<%= user.profileImg %>"
+            src="<%= user.profileImg %>"
           />
           <% } else { %>
           <img

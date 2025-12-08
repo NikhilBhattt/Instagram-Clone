@@ -1,17 +1,15 @@
-const multer = require('multer')
-const { v4 : uuidv4 } = require('uuid')
-const path = require('path')
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("./cloudinary");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/images/uploads')
-    },
-    filename: function (req, file, cb) {
-      const uniqueFilename = uuidv4()
-      cb(null, uniqueFilename+path.extname(file.originalname))
-    }
-})
-  
-const upload = multer({ storage: storage })
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "instagram-clone",
+    allowed_formats: ["jpg", "png", "jpeg", "webp"],
+  },
+});
 
-module.exports = upload
+const upload = multer({ storage });
+
+module.exports = upload;

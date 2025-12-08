@@ -21,7 +21,7 @@
             <% if (user.profileImg) { %>
             <img
               class="w-full h-full object-cover"
-              src="/images/uploads/<%= user.profileImg %>"
+              src="<%= user.profileImg %>"
             />
             <% } else { %>
             <img
@@ -42,7 +42,7 @@
             <% if (otherUser.profileImg) { %>
             <img
               class="w-full h-full object-cover"
-              src="/images/uploads/<%= otherUser.profileImg %>"
+              src="<%= otherUser.profileImg %>"
             />
             <% } else { %>
             <img
@@ -68,7 +68,7 @@
             <% if (post.user.profileImg) { %>
             <img
               class="w-full h-full object-cover"
-              src="/images/uploads/<%= post.user.profileImg %>"
+              src="<%= post.user.profileImg %>"
             />
             <% } else { %>
             <img
@@ -91,7 +91,7 @@
         <div id="<%= post._id %>" class="postImage w-full h-96 mt-4 bg-sky-100 md:rounded-md overflow-hidden">
           <img
             class="w-full h-full object-cover"
-            src="/images/uploads/<%= post.postImage %>"
+            src="<%= post.postImage %>"
             alt=""
           />
         </div>
