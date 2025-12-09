@@ -78,14 +78,26 @@ router.post("/register", async function (req, res) {
   });
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/feed",
-    failureRedirect: "/login",
-  }),
-  function (req, res) {}
-);
+router.post("/login", function (req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.render("login", {
+        footer: false,
+        title: "Instagram - Login",
+        error: "Invalid username or password",
+      });
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/feed");
+    });
+  })(req, res, next);
+});
 
 router.get("/logout", function (req, res, next) {
   req.logout(function (err) {

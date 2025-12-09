@@ -6,7 +6,10 @@
     class="md:w-[25%] px-6 py-16 md:border-2 md:border-zinc-800 rounded-md flex flex-col items-center gap-5"
   >
     <img class="w-1/2" src="/images/logo.png" alt="" />
-    <% if (typeof error !== "undefined") { %> <%= error %> <% } %>
+    <% if (typeof error !== "undefined") { %>
+    <p class="text-sm text-red-400"><%= error %></p>
+    <% } %>
+
     <form class="w-full" action="/register" method="post">
       <input
         class="px-3 mt-2 py-2 border-2 border-zinc-800 rounded-md block w-full bg-zinc-900"
